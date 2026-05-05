@@ -1,0 +1,48 @@
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, #1a1a2e, #1F5C99);
+    color: white;
+    padding: 100px 0;
+}
+
+/* Feature Box */
+.feature-box {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.feature-box:hover {
+    transform: translateY(-5px);
+}
+
+/* Navbar */
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+    color: white !important;
+}/* Admin Sidebar */
+.sidebar-admin {
+    background: #1a1a2e;
+}
+/* Sidebar Fix */
+.sidebar-admin {
+    background: #1a1a2e;
+    min-width: 200px;
+}
+
+.sidebar-admin .nav-link {
+    font-size: 14px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.sidebar-admin .nav-link:hover {
+    background: #1F5C99;
+}
+
+.sidebar-admin .nav-link.active {
+    background: #1F5C99;
+}
