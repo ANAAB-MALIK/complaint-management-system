@@ -45,4 +45,25 @@
 
 .sidebar-admin .nav-link.active {
     background: #1F5C99;
+}/* Animations */
+.card {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.hero-section h1 {
+    animation: slideDown 0.8s ease-in-out;
+}
+
+.feature-box {
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
