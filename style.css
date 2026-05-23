@@ -1,4 +1,4 @@
-/* Hero Section */
+ /* Hero Section */
 .hero-section {
     background: linear-gradient(135deg, #1a1a2e, #1F5C99);
     color: white;
@@ -22,11 +22,9 @@
     font-size: 24px;
     font-weight: bold;
     color: white !important;
-}/* Admin Sidebar */
-.sidebar-admin {
-    background: #1a1a2e;
 }
-/* Sidebar Fix */
+
+/* Admin Sidebar */
 .sidebar-admin {
     background: #1a1a2e;
     min-width: 200px;
@@ -45,7 +43,17 @@
 
 .sidebar-admin .nav-link.active {
     background: #1F5C99;
-}/* Animations */
+}
+
+/* Admin Body */
+.admin-body {
+    background: #1a1a2e;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+/* Animations */
 .card {
     animation: fadeIn 0.5s ease-in-out;
 }

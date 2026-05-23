@@ -1,4 +1,4 @@
-<?php
+ <?php
 session_start();
 include '../config.php';
 
@@ -11,6 +11,13 @@ $total = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM complaints"));
 $pending = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM complaints WHERE status='Pending'"));
 $inprogress = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM complaints WHERE status='In Progress'"));
 $resolved = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM complaints WHERE status='Resolved'"));
+
+// Category wise count
+$hostel = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM complaints WHERE category='Hostel'"));
+$fee = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM complaints WHERE category='Fee'"));
+$faculty = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM complaints WHERE category='Faculty'"));
+$facilities = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM complaints WHERE category='Facilities'"));
+$other = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM complaints WHERE category='Other'"));
 
 // Recent complaints
 $recent = mysqli_query($conn, "SELECT complaints.*, users.first_name, users.last_name 
@@ -26,6 +33,7 @@ $recent = mysqli_query($conn, "SELECT complaints.*, users.first_name, users.last
     <title>Admin Dashboard - CMS</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../CSS/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -87,6 +95,22 @@ $recent = mysqli_query($conn, "SELECT complaints.*, users.first_name, users.last
                     </div>
                 </div>
 
+                <!-- CHARTS -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="card p-3">
+                            <h5 class="text-center mb-3">Complaints by Status</h5>
+                            <canvas id="statusChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card p-3">
+                            <h5 class="text-center mb-3">Complaints by Category</h5>
+                            <canvas id="categoryChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- RECENT COMPLAINTS -->
                 <h4 class="mb-3">Recent Complaints</h4>
                 <div class="table-responsive">
@@ -126,6 +150,41 @@ $recent = mysqli_query($conn, "SELECT complaints.*, users.first_name, users.last
             </div>
         </div>
     </div>
+
+    <!-- CHART JS -->
+    <script>
+    // Status Chart
+    var ctx1 = document.getElementById('statusChart').getContext('2d');
+    new Chart(ctx1, {
+        type: 'doughnut',
+        data: {
+            labels: ['Pending', 'In Progress', 'Resolved'],
+            datasets: [{
+                data: [<?php echo $pending; ?>, <?php echo $inprogress; ?>, <?php echo $resolved; ?>],
+                backgroundColor: ['#ffc107', '#0dcaf0', '#198754']
+            }]
+        }
+    });
+
+    // Category Chart
+    var ctx2 = document.getElementById('categoryChart').getContext('2d');
+    new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: ['Hostel', 'Fee', 'Faculty', 'Facilities', 'Other'],
+            datasets: [{
+                label: 'Complaints',
+                data: [<?php echo $hostel; ?>, <?php echo $fee; ?>, <?php echo $faculty; ?>, <?php echo $facilities; ?>, <?php echo $other; ?>],
+                backgroundColor: ['#0d6efd', '#ffc107', '#dc3545', '#198754', '#6c757d']
+            }]
+        },
+        options: {
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
